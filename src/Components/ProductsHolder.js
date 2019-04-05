@@ -2,8 +2,7 @@ import React from "react";
 import Product from "./Product";
 import CardContainer from "./CardContainer";
 
-const ProductsHolder = props => {
-  console.log(props)
+const ProductsHolder = props => { 
     return (
     <div>
       {props.products.map(product => {

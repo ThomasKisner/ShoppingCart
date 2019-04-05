@@ -1,7 +1,7 @@
 import React from "react";
 
 const CardContainer = props => {
-  console.log(props.children);
+   
   return (
     <div className="ui card">
       <div className="content">{props.children}</div>

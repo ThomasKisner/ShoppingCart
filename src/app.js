@@ -50,9 +50,9 @@ class App extends React.Component {
     };
   }
 
-  addToCart = (e) => {
+  addToCart = e => {
     console.log(e.target);
-  }
+  };
 
   componentDidMount() {
     console.log(this.state);
@@ -65,14 +65,24 @@ class App extends React.Component {
 
   addToCart = e => {
     //console.log(e.target.getAttribute('name'));
-    const added = this.state.products.find(product => product.productDesc === e.target.getAttribute('name'))
+    const added = this.state.products.find(
+      product => product.productDesc === e.target.getAttribute("name")
+    );
     console.log(added);
-};
+    if(this.state.cart.find(product => product.product === added.product)===undefined){
+    const newArray = this.state.cart.concat(added);
+    this.setState({ cart: newArray }, () => console.log(this.state));
+    }
+  };
 
   render() {
     return (
       <>
-  <ProductsHolder products={this.state.products} addToCart={this.addToCart}/>
+        <ProductsHolder
+          products={this.state.products}
+          addToCart={this.addToCart}
+        />
+        <InCart cart={this.state.cart} />
       </>
     );
   }
