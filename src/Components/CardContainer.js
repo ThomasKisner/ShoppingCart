@@ -14,6 +14,13 @@ const CardContainer = props => {
           >
             Add To Cart
           </div>
+          <div
+            className="ui basic grey button"
+            onClick={props.deleteItem}
+            name={props.children.props.productDesc}
+          >
+            Delete Item
+          </div>
         </div>
       </div>
     </div>

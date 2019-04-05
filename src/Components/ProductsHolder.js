@@ -7,7 +7,7 @@ const ProductsHolder = props => {
     <div>
       {props.products.map(product => {
         return (
-          <CardContainer key={product.product} addToCart={props.addToCart}>
+          <CardContainer key={product.product} addToCart={props.addToCart} deleteItem={props.deleteItem}>
             <Product
               img={product.img}
               product={product.product}

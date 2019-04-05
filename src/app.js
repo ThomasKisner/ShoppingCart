@@ -63,15 +63,27 @@ class App extends React.Component {
     return number.toFixed(2);
   };
 
+  deleteItem = e => {
+    //create a new array with target product filtered out, then set to state
+    const newProductState = this.state.products.filter(
+      product => product.productDesc !== e.target.getAttribute("name")
+    );
+    console.log(newProductState);
+    this.setState({ products: newProductState });
+  };
+
   addToCart = e => {
-    //console.log(e.target.getAttribute('name'));
+    //using the product attribute to grab the whole project object and assigning it to a variable
     const added = this.state.products.find(
       product => product.productDesc === e.target.getAttribute("name")
     );
-    console.log(added);
-    if(this.state.cart.find(product => product.product === added.product)===undefined){
-    const newArray = this.state.cart.concat(added);
-    this.setState({ cart: newArray }, () => console.log(this.state));
+    //if the assigned variable is not in the cart array it can be added.
+    if (
+      this.state.cart.find(product => product.product === added.product) ===
+      undefined
+    ) {
+      const newArray = this.state.cart.concat(added);
+      this.setState({ cart: newArray }, () => console.log(this.state));
     }
   };
 
@@ -81,6 +93,7 @@ class App extends React.Component {
         <ProductsHolder
           products={this.state.products}
           addToCart={this.addToCart}
+          deleteItem={this.deleteItem}
         />
         <InCart cart={this.state.cart} />
       </>
