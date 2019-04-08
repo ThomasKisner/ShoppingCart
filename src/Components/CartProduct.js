@@ -7,7 +7,7 @@ return(
 <div className="ui cards">
   <div className="card">
     <div className="content">
-      <img className="right floated med ui image" src={props.img} alt="Shelby vehicle"/>
+      <img className="right floated med ui image" src={props.img} alt="Shelby"/>
       <div className="header">
         {props.productDesc}
       </div>
@@ -18,12 +18,6 @@ return(
        ${props.price}
       </div>
     </div>
-    {/* <div className="extra content">
-      <div className="ui two buttons">
-        <div className="ui basic green button" onClick={props.removeCartItem}>Remove From Cart</div>
- 
-      </div>
-    </div> */}
   </div>
   </div>
    

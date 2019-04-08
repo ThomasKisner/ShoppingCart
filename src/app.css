@@ -59,12 +59,6 @@
     width: fit-content;
 }
 
-.modalFloating {
-  position: fixed; 
-  bottom: 10px;
-  right: 10px;
-  text-emphasis: 400;
-}
 
 .ui.button.ui.basic.grey.button:hover{
   background-color: darkgray !important;
@@ -74,4 +68,32 @@
 .ui.button.ui.basic.grey.button:active{
   background-color: gray !important;
   color: white !important;
+}
+
+.ui.button.ui.basic.grey.button.modalFloating {
+  position: fixed; 
+  bottom: 10px;
+  right: 10px;
+  text-emphasis: 400;
+  background-color: darkgray !important;
+  color: white !important;
+  z-index: 9999
+}
+
+.ui.button.ui.basic.grey.button.modalFloating:active {
+  position: fixed; 
+  bottom: 10px;
+  right: 10px;
+  text-emphasis: 400;
+  background-color: gray !important;
+  color: white !important;
+  z-index: 9999
+}
+
+.productsContainer{
+  padding-bottom: 50px;
+}
+
+.s-alert-wrapper{
+  text-align: center;
 }

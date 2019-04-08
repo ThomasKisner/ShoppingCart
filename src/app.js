@@ -1,7 +1,11 @@
-import React from "react"; 
+import React from "react";
 import ProductsHolder from "./Components/ProductsHolder.js";
 import CartModalFloating from "./Components/CartModalFloating";
+import Alert from "react-s-alert";
 import "./app.css";
+require("react-s-alert/dist/s-alert-default.css");
+require("react-s-alert/dist/s-alert-css-effects/genie.css");
+require("react-s-alert/dist/s-alert-css-effects/bouncyflip.css");
 
 class App extends React.Component {
   constructor(props) {
@@ -56,7 +60,7 @@ class App extends React.Component {
 
   handleInput = e => {
     this.setState({ [e.target.name]: e.target.value });
-    
+
     console.log(this.state);
   };
 
@@ -67,38 +71,48 @@ class App extends React.Component {
 
   addProduct = (e, numberWithCommas) => {
     //making sure vehicle isn't already added
-   if(!this.state.products.find(product=> product.productDesc.toLowerCase() === this.state.newProductName.toLowerCase() )){
-    //making sure price number has 2 decimal places and commas where appropriate
-    let number = parseInt(this.state.newProductPrice).toFixed(2);
-    number = this.numberWithCommas(number);
+    if (
+      !this.state.products.find(
+        product =>
+          product.productDesc.toLowerCase() ===
+          this.state.newProductName.toLowerCase()
+      )
+    ) {
+      //making sure price number has 2 decimal places and commas where appropriate
+      let number = parseInt(this.state.newProductPrice).toFixed(2);
+      number = this.numberWithCommas(number);
 
-    //stock logo used for added product if no url supplied
-    if (this.state.newProductURL === "") {
-      console.log("no vehicle url");
-      var logo = "/logo.jpg";
+      //stock logo used for added product if no url supplied
+      if (this.state.newProductURL === "") {
+        console.log("no vehicle url");
+        var logo = "/logo.jpg";
+      } else {
+        console.log("vehicle url defined");
+        var logo = this.state.newProductURL;
+      }
+      let added = {
+        img: logo,
+        price: number.toLocaleString(),
+        product: this.state.newProductDesc,
+        productDesc: this.state.newProductName,
+        star: "0.00"
+      };
+      //Add product to new array, reset all input fields for adding a product
+      const newArray = this.state.products.concat(added);
+      this.setState({
+        products: newArray,
+        newProductName: "",
+        newProductDesc: "",
+        newProductPrice: "",
+        newProductURL: ""
+      });
     } else {
-      console.log("vehicle url defined");
-      var logo = this.state.newProductURL;
+      Alert.error(`That vehicle has already been added</h1>`, {
+        timeout: 2000,
+        position: 'bottom',
+        offset:100,
+      })
     }
-    let added = {
-      img: logo,
-      price: number.toLocaleString(),
-      product: this.state.newProductDesc,
-      productDesc: this.state.newProductName,
-      star: "0.00"
-    };
-    //Add product to new array, reset all input fields for adding a product
-    const newArray = this.state.products.concat(added);
-    this.setState({
-      products: newArray,
-      newProductName: "",
-      newProductDesc: "",
-      newProductPrice: "",
-      newProductURL: ""
-    });
-  } else {
-    alert('That vehicle is already in database');
-  }
   };
 
   deleteItem = e => {
@@ -111,7 +125,7 @@ class App extends React.Component {
   };
 
   addToCart = e => {
-    console.log('adding to cart')
+    console.log("adding to cart");
     //using the product attribute to grab the whole project object and assigning it to a variable
     const added = this.state.products.find(
       product => product.productDesc === e.target.getAttribute("name")
@@ -122,9 +136,10 @@ class App extends React.Component {
       undefined
     ) {
       const newArray = this.state.cart.concat(added);
-      const newCartTotal = this.state.cartTotal+this.state.newProductPrice;
-      this.setState({ cart: newArray, cartToal: newCartTotal }, () => console.log(this.state));
-      
+      const newCartTotal = this.state.cartTotal + this.state.newProductPrice;
+      this.setState({ cart: newArray, cartToal: newCartTotal }, () =>
+        console.log(this.state)
+      );
     }
   };
 
@@ -152,7 +167,13 @@ class App extends React.Component {
           removeCartItem={this.removeCartItem}
         />
 
-        <CartModalFloating cart={this.state.cart} removeCartItem={this.removeCartItem} cartTotal={this.state.cartTotal} text="View Cart"/>
+        <CartModalFloating
+          cart={this.state.cart}
+          removeCartItem={this.removeCartItem}
+          cartTotal={this.state.cartTotal}
+          text="View Cart"
+        />
+          <Alert stack={{limit: 3}} html={true} />
       </>
     );
   }
