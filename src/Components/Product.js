@@ -1,6 +1,6 @@
 import React from "react";
 
-const Product = props => { 
+const Product = props => {  
   return (
     <div className="ui link cards">
       <div className="card">

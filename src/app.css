@@ -1,0 +1,77 @@
+.productsContainer {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.ui.card:first-child {
+  margin-top: 14px;
+}
+
+/* .ui.card:last-child {
+    height: 438.59px;
+} */
+
+.ui.form .fields {
+  flex-direction: column;
+}
+
+.ui.form .fields .field {
+  padding-bottom: 1rem;
+}
+
+.extra.content.center {
+  margin: 0 auto;
+}
+
+.ui.card:last-child {
+  margin-bottom: 14px;
+}
+
+.ui.form h2 {
+  width: fit-content;
+  margin: 0 auto 1rem auto;
+}
+
+.cart {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.ui.modal.transition.visible.active {
+  width: fit-content;
+  min-width: 20%;
+  max-width: 90%;
+  height: fit-content;
+  min-height: 20%;
+  padding: 0 2%;
+}
+
+.modalFooter{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 5%;
+    margin-bottom: 20px;
+}
+
+.modalFooter h4{
+    width: fit-content;
+}
+
+.modalFloating {
+  position: fixed; 
+  bottom: 10px;
+  right: 10px;
+  text-emphasis: 400;
+}
+
+.ui.button.ui.basic.grey.button:hover{
+  background-color: darkgray !important;
+  color: white !important;
+}
+
+.ui.button.ui.basic.grey.button:active{
+  background-color: gray !important;
+  color: white !important;
+}

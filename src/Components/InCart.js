@@ -1,34 +1,28 @@
 import React from "react";
-import Product from './Product';
-import CardContainer from './CardContainer';
+import CartProduct from "./CartProduct";
+import DeleteContainer from "./DeleteContainer";
 
 const InCart = props => {
-  //    if (props.cart != undefined) {
+ 
   return (
-    <div>
+    <div className="cart">
       {props.cart.map((product, index) => {
         return (
-           
-            <CardContainer key={index}  >
-            <Product
-                key={index}
-              img={null}
+          <DeleteContainer key={index} removeCartItem={props.removeCartItem}>
+            <CartProduct
+              key={index}
+              img={product.img}
               product={product.product}
               productDesc={product.productDesc}
               price={product.price}
               star={product.star}
+              removeCartItem={props.removeCartItem}
             />
-          </CardContainer>
-     
-        
+          </DeleteContainer>
         );
       })}
     </div>
   );
-  //}
-  //else{
-  //  return
-  //  }
 };
 
 export default InCart;

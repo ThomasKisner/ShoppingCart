@@ -1,19 +1,20 @@
 import React from "react";
+import CartModal from './CartModal'
 
-const CardContainer = props => {
-   
+const CardContainer = props => { 
   return (
     <div className="ui card">
       <div className="content">{props.children}</div>
       <div className="extra content">
         <div className="ui two buttons">
-          <div
-            className="ui basic grey button"
-            onClick={props.addToCart}
-            name={props.children.props.productDesc}
-          >
-            Add To Cart
-          </div>
+          <CartModal 
+            props={props} 
+            cart={props.cart} 
+            removeCartItem={props.removeCartItem} 
+            addToCart={props.addToCart} 
+            name={props.children.props.productDesc} 
+            text="Add To Cart"
+        />
           <div
             className="ui basic grey button"
             onClick={props.deleteItem}

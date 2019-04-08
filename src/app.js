@@ -1,9 +1,7 @@
-import React from "react";
-import Product from "./Components/Product.js";
-import CardContainer from "./Components/CardContainer.js";
-import InCart from "./Components/InCart.js";
-import faker from "faker";
+import React from "react"; 
 import ProductsHolder from "./Components/ProductsHolder.js";
+import CartModalFloating from "./Components/CartModalFloating";
+import "./app.css";
 
 class App extends React.Component {
   constructor(props) {
@@ -11,56 +9,96 @@ class App extends React.Component {
     this.state = {
       products: [
         {
-          img: "http://lorempixel.com/640/280/cats",
-          price: "336.00",
-          product: "Ergonomic Concrete Tuna",
-          productDesc: "Mouse",
-          star: "4.21"
+          img: "/shelby427.jpg",
+          price: "8,000,000.00",
+          product: "427CI, 500HP, 200MPH",
+          productDesc: "Cobra",
+          star: "4.71"
         },
         {
-          img: "http://lorempixel.com/640/480/cats",
-          price: "6.00",
-          product: "Plush Metal Rhino",
-          productDesc: "Hammer",
-          star: "3.71"
+          img: "/shelbydaytona.jpg",
+          price: "7,250,000.00",
+          product: "289CI, 385HP, 194MPH",
+          productDesc: "Daytona",
+          star: "4.51"
+        },
+
+        {
+          img: "/shelbygt40.jpg",
+          price: "11,000,000.00",
+          product: "289CI, 385HP, 210MPH",
+          productDesc: "GT40 MKI",
+          star: "4.9"
         },
         {
-          img: "http://lorempixel.com/640/580/cats",
-          price: "200.00",
-          product: "Incredible Rubber Towels",
-          productDesc: "Ball",
-          star: "0.87"
+          img: "/shelbygt40mkii.jpg",
+          price: "15,000,000.00",
+          product: "427CI, 550HP , 220MPH",
+          productDesc: "GT40 MKII",
+          star: "5.00"
         },
         {
-          img: "http://lorempixel.com/640/680/cats",
-          price: "148.00",
-          product: "Practical Soft Table",
-          productDesc: "Car",
-          star: "2.87"
-        },
-        {
-          img: "http://lorempixel.com/640/280/cats",
-          price: "413.00",
-          product: "Sleek Metal Bike",
-          productDesc: "Train",
-          star: "2.37"
+          img: "/shelbygt500.jpg",
+          price: "1,200,000.00",
+          product: "427CI, 400HP, 140MPH",
+          productDesc: "GT500",
+          star: "4.25"
         }
       ],
-      cart: []
+      cart: [],
+      newProductName: "",
+      newProductDesc: "",
+      newProductPrice: "",
+      newProductURL: "",
+      cartTotal: 0
     };
   }
 
-  addToCart = e => {
-    console.log(e.target);
+  handleInput = e => {
+    this.setState({ [e.target.name]: e.target.value });
+    
+    console.log(this.state);
   };
 
-  componentDidMount() {
-    console.log(this.state);
-  }
+  //adds commas to price string
+  numberWithCommas = number => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
 
-  starRating = () => {
-    let number = Math.random() * 5;
-    return number.toFixed(2);
+  addProduct = (e, numberWithCommas) => {
+    //making sure vehicle isn't already added
+   if(!this.state.products.find(product=> product.productDesc.toLowerCase() === this.state.newProductName.toLowerCase() )){
+    //making sure price number has 2 decimal places and commas where appropriate
+    let number = parseInt(this.state.newProductPrice).toFixed(2);
+    number = this.numberWithCommas(number);
+
+    //stock logo used for added product if no url supplied
+    if (this.state.newProductURL === "") {
+      console.log("no vehicle url");
+      var logo = "/logo.jpg";
+    } else {
+      console.log("vehicle url defined");
+      var logo = this.state.newProductURL;
+    }
+    let added = {
+      img: logo,
+      price: number.toLocaleString(),
+      product: this.state.newProductDesc,
+      productDesc: this.state.newProductName,
+      star: "0.00"
+    };
+    //Add product to new array, reset all input fields for adding a product
+    const newArray = this.state.products.concat(added);
+    this.setState({
+      products: newArray,
+      newProductName: "",
+      newProductDesc: "",
+      newProductPrice: "",
+      newProductURL: ""
+    });
+  } else {
+    alert('That vehicle is already in database');
+  }
   };
 
   deleteItem = e => {
@@ -73,6 +111,7 @@ class App extends React.Component {
   };
 
   addToCart = e => {
+    console.log('adding to cart')
     //using the product attribute to grab the whole project object and assigning it to a variable
     const added = this.state.products.find(
       product => product.productDesc === e.target.getAttribute("name")
@@ -83,8 +122,19 @@ class App extends React.Component {
       undefined
     ) {
       const newArray = this.state.cart.concat(added);
-      this.setState({ cart: newArray }, () => console.log(this.state));
+      const newCartTotal = this.state.cartTotal+this.state.newProductPrice;
+      this.setState({ cart: newArray, cartToal: newCartTotal }, () => console.log(this.state));
+      
     }
+  };
+
+  removeCartItem = e => {
+    //using the product attribute to grab the whole project object and assigning it to a variable
+    const cartArray = this.state.cart.filter(
+      product => product.productDesc !== e.target.getAttribute("name")
+    );
+    this.setState({ cart: cartArray }, () => console.log(this.state));
+    console.log("hi");
   };
 
   render() {
@@ -94,8 +144,15 @@ class App extends React.Component {
           products={this.state.products}
           addToCart={this.addToCart}
           deleteItem={this.deleteItem}
+          handleInput={this.handleInput}
+          addProduct={this.addProduct}
+          state={this.state}
+          description="Add Shelby"
+          cart={this.state.cart}
+          removeCartItem={this.removeCartItem}
         />
-        <InCart cart={this.state.cart} />
+
+        <CartModalFloating cart={this.state.cart} removeCartItem={this.removeCartItem} cartTotal={this.state.cartTotal} text="View Cart"/>
       </>
     );
   }
