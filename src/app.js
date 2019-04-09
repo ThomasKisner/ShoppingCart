@@ -70,48 +70,63 @@ class App extends React.Component {
   };
 
   addProduct = (e, numberWithCommas) => {
-    //making sure vehicle isn't already added
     if (
-      !this.state.products.find(
-        product =>
-          product.productTitle.toLowerCase() ===
-          this.state.newProductDesc.toLowerCase()
-      )
+      this.state.newProductDesc === "" ||
+      this.state.newProductPrice === "" ||
+      this.state.newProductTitle === ""
     ) {
-      //making sure price number has 2 decimal places and commas where appropriate
-      let number = parseInt(this.state.newProductPrice).toFixed(2);
-      number = this.numberWithCommas(number);
-
-      //stock logo used for added product if no url supplied
-      if (this.state.newProductURL === "") {
-        console.log("no vehicle url");
-        var logo = "/logo.jpg";
-      } else {
-        console.log("vehicle url defined");
-        var logo = this.state.newProductURL;
-      }
-      let added = {
-        img: logo,
-        price: number.toLocaleString(),
-        product: this.state.newProductDesc,
-        productTitle: this.state.newProductTitle,
-        star: "0.00"
-      };
-      //Add product to new array, reset all input fields for adding a product
-      const newArray = this.state.products.concat(added);
-      this.setState({
-        products: newArray,
-        newProductName: "",
-        newProductTitle: "",
-        newProductPrice: "",
-        newProductURL: ""
-      });
+      Alert.error(
+        `New product name, description, and price are required</h1>`,
+        {
+          timeout: 2000,
+          position: "bottom",
+          offset: 100
+        }
+      );
     } else {
-      Alert.error(`That vehicle has already been added</h1>`, {
-        timeout: 2000,
-        position: 'bottom',
-        offset:100,
-      })
+      //making sure vehicle isn't already added
+      if (
+        !this.state.products.find(
+          product =>
+            product.productTitle.toLowerCase() ===
+            this.state.newProductDesc.toLowerCase()
+        )
+      ) {
+        //making sure price number has 2 decimal places and commas where appropriate
+        let number = parseInt(this.state.newProductPrice).toFixed(2);
+        number = this.numberWithCommas(number);
+
+        //stock logo used for added product if no url supplied
+        if (this.state.newProductURL === "") {
+          console.log("no vehicle url");
+          var logo = "/logo.jpg";
+        } else {
+          console.log("vehicle url defined");
+          var logo = this.state.newProductURL;
+        }
+        let added = {
+          img: logo,
+          price: number.toLocaleString(),
+          product: this.state.newProductDesc,
+          productTitle: this.state.newProductTitle,
+          star: "0.00"
+        };
+        //Add product to new array, reset all input fields for adding a product
+        const newArray = this.state.products.concat(added);
+        this.setState({
+          products: newArray,
+          newProductTitle: "",
+          newProductDesc: "",
+          newProductPrice: "",
+          newProductURL: ""
+        });
+      } else {
+        Alert.error(`That vehicle has already been added</h1>`, {
+          timeout: 2000,
+          position: "bottom",
+          offset: 100
+        });
+      }
     }
   };
 
@@ -131,11 +146,12 @@ class App extends React.Component {
       product => product.productTitle === e.target.getAttribute("name")
     );
 
-    console.log(added.product)
+    console.log(added.product);
     //if the assigned variable is not in the cart array it can be added.
     if (
-      this.state.cart.find(product => product.productTitle === added.productTitle) ===
-      undefined
+      this.state.cart.find(
+        product => product.productTitle === added.productTitle
+      ) === undefined
     ) {
       const newArray = this.state.cart.concat(added);
       const newCartTotal = this.state.cartTotal + this.state.newProductPrice;
@@ -175,7 +191,7 @@ class App extends React.Component {
           cartTotal={this.state.cartTotal}
           text="View Cart"
         />
-          <Alert stack={{limit: 3}} html={true} />
+        <Alert stack={{ limit: 3 }} html={true} />
       </>
     );
   }
