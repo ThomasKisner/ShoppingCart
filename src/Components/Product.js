@@ -1,5 +1,6 @@
 import React from "react";
 
+//Product returns product information
 const Product = props => {  
   return (
     <div className="ui link cards">
@@ -8,7 +9,7 @@ const Product = props => {
           <img src={props.img} alt="randomProductImage"/>
         </div>
         <div className="content">
-          <div className="header">{props.productDesc}</div>
+          <div className="header">{props.productTitle}</div>
           <div className="meta"> 
           </div>
           <div className="description">

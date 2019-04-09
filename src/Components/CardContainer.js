@@ -1,6 +1,8 @@
 import React from "react";
 import CartModal from './CartModal'
 
+
+//Card container wraps product details to give user add to cart and delete product options
 const CardContainer = props => { 
   return (
     <div className="ui card">
@@ -12,13 +14,13 @@ const CardContainer = props => {
             cart={props.cart} 
             removeCartItem={props.removeCartItem} 
             addToCart={props.addToCart} 
-            name={props.children.props.productDesc} 
+            name={props.children.props.productTitle} 
             text="Add To Cart"
         />
           <div
             className="ui basic grey button"
             onClick={props.deleteItem}
-            name={props.children.props.productDesc}
+            name={props.children.props.productTitle}
           >
             Delete Item
           </div>

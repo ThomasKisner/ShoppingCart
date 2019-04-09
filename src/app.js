@@ -16,14 +16,14 @@ class App extends React.Component {
           img: "/shelby427.jpg",
           price: "8,000,000.00",
           product: "427CI, 500HP, 200MPH",
-          productDesc: "Cobra",
+          productTitle: "Cobra",
           star: "4.71"
         },
         {
           img: "/shelbydaytona.jpg",
           price: "7,250,000.00",
           product: "289CI, 385HP, 194MPH",
-          productDesc: "Daytona",
+          productTitle: "Daytona",
           star: "4.51"
         },
 
@@ -31,27 +31,27 @@ class App extends React.Component {
           img: "/shelbygt40.jpg",
           price: "11,000,000.00",
           product: "289CI, 385HP, 210MPH",
-          productDesc: "GT40 MKI",
+          productTitle: "GT40 MKI",
           star: "4.9"
         },
         {
           img: "/shelbygt40mkii.jpg",
           price: "15,000,000.00",
           product: "427CI, 550HP , 220MPH",
-          productDesc: "GT40 MKII",
+          productTitle: "GT40 MKII",
           star: "5.00"
         },
         {
           img: "/shelbygt500.jpg",
           price: "1,200,000.00",
           product: "427CI, 400HP, 140MPH",
-          productDesc: "GT500",
+          productTitle: "GT500",
           star: "4.25"
         }
       ],
       cart: [],
-      newProductName: "",
       newProductDesc: "",
+      newProductTitle: "",
       newProductPrice: "",
       newProductURL: "",
       cartTotal: 0
@@ -74,8 +74,8 @@ class App extends React.Component {
     if (
       !this.state.products.find(
         product =>
-          product.productDesc.toLowerCase() ===
-          this.state.newProductName.toLowerCase()
+          product.productTitle.toLowerCase() ===
+          this.state.newProductDesc.toLowerCase()
       )
     ) {
       //making sure price number has 2 decimal places and commas where appropriate
@@ -94,7 +94,7 @@ class App extends React.Component {
         img: logo,
         price: number.toLocaleString(),
         product: this.state.newProductDesc,
-        productDesc: this.state.newProductName,
+        productTitle: this.state.newProductTitle,
         star: "0.00"
       };
       //Add product to new array, reset all input fields for adding a product
@@ -102,7 +102,7 @@ class App extends React.Component {
       this.setState({
         products: newArray,
         newProductName: "",
-        newProductDesc: "",
+        newProductTitle: "",
         newProductPrice: "",
         newProductURL: ""
       });
@@ -118,7 +118,7 @@ class App extends React.Component {
   deleteItem = e => {
     //create a new array with target product filtered out, then set to state
     const newProductState = this.state.products.filter(
-      product => product.productDesc !== e.target.getAttribute("name")
+      product => product.productTitle !== e.target.getAttribute("name")
     );
     console.log(newProductState);
     this.setState({ products: newProductState });
@@ -128,11 +128,13 @@ class App extends React.Component {
     console.log("adding to cart");
     //using the product attribute to grab the whole project object and assigning it to a variable
     const added = this.state.products.find(
-      product => product.productDesc === e.target.getAttribute("name")
+      product => product.productTitle === e.target.getAttribute("name")
     );
+
+    console.log(added.product)
     //if the assigned variable is not in the cart array it can be added.
     if (
-      this.state.cart.find(product => product.product === added.product) ===
+      this.state.cart.find(product => product.productTitle === added.productTitle) ===
       undefined
     ) {
       const newArray = this.state.cart.concat(added);
@@ -146,7 +148,7 @@ class App extends React.Component {
   removeCartItem = e => {
     //using the product attribute to grab the whole project object and assigning it to a variable
     const cartArray = this.state.cart.filter(
-      product => product.productDesc !== e.target.getAttribute("name")
+      product => product.productTitle !== e.target.getAttribute("name")
     );
     this.setState({ cart: cartArray }, () => console.log(this.state));
     console.log("hi");

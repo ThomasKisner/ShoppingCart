@@ -1,5 +1,6 @@
 import React from "react";
 
+//Component creates form users can add a product with
 const AddProduct = (props) => {
   return (
     <div className="ui form" id="form">
@@ -9,17 +10,17 @@ const AddProduct = (props) => {
           <label>Car Name</label>
           <input
             type="text"
-            placeholder="Car Name"
-            name="newProductName"
+            placeholder="Car Name *Required*"
+            name="newProductTitle"
             onChange={props.handleInput}
-            value={props.state.newProductName}
+            value={props.state.newProductTitle}
           />
         </div>
         <div className="field">
           <label>Car Description</label>
           <input
             type="text"
-            placeholder="Car Description"
+            placeholder="Car Description *Required*"
             name="newProductDesc"
             onChange={props.handleInput}
             value={props.state.newProductDesc}
@@ -29,7 +30,7 @@ const AddProduct = (props) => {
           <label>Car Price</label>
           <input
             type="number"
-            placeholder="Price"
+            placeholder="Price *Required*"
             name="newProductPrice"
             onChange={props.handleInput}
             value={props.state.newProductPrice}

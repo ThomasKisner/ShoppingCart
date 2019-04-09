@@ -8,10 +8,10 @@ const SingleButtonCardContainer = props => {
         <div className="ui buttons">
           <div
             className="ui basic grey button center"
-            onClick={props.addProduct}
-            name={props.children.props.productDesc}
+            onClick={props.function}
+            name={props.children.props.productTitle}
           >
-            Add Shelby
+            {props.buttonText}
           </div>
         </div>
       </div>

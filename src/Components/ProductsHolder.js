@@ -4,13 +4,14 @@ import CardContainer from "./CardContainer";
 import SingleButtonCardContainer from "./SingleButtonCardContainer";
 import AddProduct from "./AddProduct";
 
+//ProdutsHolder returns all products wrapped in a container div that allows cart adds and product deletes
 const ProductsHolder = props => {
   return (
     <div className="productsContainer">
       {props.products.map(product => {
         return (
           <CardContainer
-            key={product.product}
+            key={product.productTitle}
             addToCart={props.addToCart}
             deleteItem={props.deleteItem}
             cart={props.cart}
@@ -19,14 +20,14 @@ const ProductsHolder = props => {
             <Product
               img={product.img}
               product={product.product}
-              productDesc={product.productDesc}
+              productTitle={product.productTitle}
               price={product.price}
               star={product.star}
             />
           </CardContainer>
         );
       })}
-      <SingleButtonCardContainer addProduct={props.addProduct}> 
+      <SingleButtonCardContainer function={props.addProduct} buttonText="Add Shelby"> 
         <AddProduct handleInput={props.handleInput} state={props.state}/>
       </SingleButtonCardContainer>
     </div>
