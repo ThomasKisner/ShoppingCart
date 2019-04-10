@@ -3,13 +3,13 @@ import CartProduct from "./CartProduct";
 import SingleButtonCardContainer from "./SingleButtonCardContainer";
 
 //InCart returns all items in shopping cart
-const InCart = props => (
+const InCart = ({ cart, removeCartItem }) => (
   <div className="cart">
-    {props.cart.map((product, index) => {
+    {cart.map((product, index) => {
       return (
         <SingleButtonCardContainer
           key={index}
-          function={props.removeCartItem}
+          buttonClickFunction={removeCartItem}
           buttonText="Remove From Cart"
         >
           <CartProduct
@@ -19,7 +19,7 @@ const InCart = props => (
             productTitle={product.productTitle}
             price={product.price}
             star={product.star}
-            removeCartItem={props.removeCartItem}
+            onClick={removeCartItem}
           />
         </SingleButtonCardContainer>
       );

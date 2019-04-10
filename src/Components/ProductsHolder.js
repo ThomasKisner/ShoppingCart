@@ -5,16 +5,25 @@ import SingleButtonCardContainer from "./SingleButtonCardContainer";
 import AddProduct from "./AddProduct";
 
 //ProdutsHolder returns all products wrapped in a container div that allows cart adds and product deletes
-const ProductsHolder = props => (
+const ProductsHolder = ({
+  handleInput,
+  state,
+  products,
+  addProduct,
+  cart,
+  removeCartItem,
+  addToCart,
+  deleteItem
+}) => (
   <div className="productsContainer">
-    {props.products.map(product => {
+    {products.map(product => {
       return (
         <CardContainer
           key={product.productTitle}
-          addToCart={props.addToCart}
-          deleteItem={props.deleteItem}
-          cart={props.cart}
-          removeCartItem={props.removeCartItem}
+          addToCart={addToCart}
+          deleteItem={deleteItem}
+          cart={cart}
+          removeCartItem={removeCartItem}
         >
           <Product
             img={product.img}
@@ -27,10 +36,10 @@ const ProductsHolder = props => (
       );
     })}
     <SingleButtonCardContainer
-      function={props.addProduct}
+      buttonClickFunction={addProduct}
       buttonText="Add Shelby"
     >
-      <AddProduct handleInput={props.handleInput} state={props.state} />
+      <AddProduct handleInput={handleInput} state={state} />
     </SingleButtonCardContainer>
   </div>
 );

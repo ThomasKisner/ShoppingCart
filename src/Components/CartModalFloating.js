@@ -3,15 +3,15 @@ import { Button, Modal } from "semantic-ui-react";
 import InCart from "./InCart";
 
 //CartModalFloating displays fixed button allowing user to toggle modal with cart info
-const CartModalFloating = props => (
+const CartModalFloating = ({ addToCart, name, text, cart, removeCartItem }) => (
   <Modal
     trigger={
       <Button
         className="ui basic grey button modalFloating"
-        onClick={props.addToCart}
-        name={props.name}
+        onClick={addToCart}
+        name={name}
       >
-        {props.text}
+        {text}
       </Button>
     }
     centered={false}
@@ -19,7 +19,7 @@ const CartModalFloating = props => (
   >
     <Modal.Header>Shopping Cart</Modal.Header>
     <Modal.Description>
-      <InCart cart={props.cart} removeCartItem={props.removeCartItem} />
+      <InCart cart={cart} removeCartItem={removeCartItem} />
     </Modal.Description>
   </Modal>
 );

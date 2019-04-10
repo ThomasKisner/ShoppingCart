@@ -8,60 +8,55 @@ require("react-s-alert/dist/s-alert-css-effects/genie.css");
 require("react-s-alert/dist/s-alert-css-effects/bouncyflip.css");
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      products: [
-        {
-          img: "/shelby427.jpg",
-          price: "8,000,000.00",
-          product: "427CI, 500HP, 200MPH",
-          productTitle: "Cobra",
-          star: "4.71"
-        },
-        {
-          img: "/shelbydaytona.jpg",
-          price: "7,250,000.00",
-          product: "289CI, 385HP, 194MPH",
-          productTitle: "Daytona",
-          star: "4.51"
-        },
+  state = {
+    products: [
+      {
+        img: "/shelby427.jpg",
+        price: "8,000,000.00",
+        product: "427CI, 500HP, 200MPH",
+        productTitle: "Cobra",
+        star: "4.71"
+      },
+      {
+        img: "/shelbydaytona.jpg",
+        price: "7,250,000.00",
+        product: "289CI, 385HP, 194MPH",
+        productTitle: "Daytona",
+        star: "4.51"
+      },
 
-        {
-          img: "/shelbygt40.jpg",
-          price: "11,000,000.00",
-          product: "289CI, 385HP, 210MPH",
-          productTitle: "GT40 MKI",
-          star: "4.9"
-        },
-        {
-          img: "/shelbygt40mkii.jpg",
-          price: "15,000,000.00",
-          product: "427CI, 550HP , 220MPH",
-          productTitle: "GT40 MKII",
-          star: "5.00"
-        },
-        {
-          img: "/shelbygt500.jpg",
-          price: "1,200,000.00",
-          product: "427CI, 400HP, 140MPH",
-          productTitle: "GT500",
-          star: "4.25"
-        }
-      ],
-      cart: [],
-      newProductDesc: "",
-      newProductTitle: "",
-      newProductPrice: "",
-      newProductURL: "",
-      cartTotal: 0
-    };
-  }
+      {
+        img: "/shelbygt40.jpg",
+        price: "11,000,000.00",
+        product: "289CI, 385HP, 210MPH",
+        productTitle: "GT40 MKI",
+        star: "4.9"
+      },
+      {
+        img: "/shelbygt40mkii.jpg",
+        price: "15,000,000.00",
+        product: "427CI, 550HP , 220MPH",
+        productTitle: "GT40 MKII",
+        star: "5.00"
+      },
+      {
+        img: "/shelbygt500.jpg",
+        price: "1,200,000.00",
+        product: "427CI, 400HP, 140MPH",
+        productTitle: "GT500",
+        star: "4.25"
+      }
+    ],
+    cart: [],
+    newProductDesc: "",
+    newProductTitle: "",
+    newProductPrice: "",
+    newProductURL: "",
+    cartTotal: 0
+  };
 
-  handleInput = e => {
-    this.setState({ [e.target.name]: e.target.value });
-
-    console.log(this.state);
+  handleInput = ({ target: { name, value } }) => {
+    this.setState({ [name]: value }, () => console.log(this.state));
   };
 
   //adds commas to price string
@@ -161,14 +156,18 @@ class App extends React.Component {
     }
   };
 
-  removeCartItem = e => {
+  removeCartItem = (e) => {
+    console.log('trying to remove cart item')
     //using the product attribute to grab the whole project object and assigning it to a variable
     const cartArray = this.state.cart.filter(
       product => product.productTitle !== e.target.getAttribute("name")
     );
     this.setState({ cart: cartArray }, () => console.log(this.state));
-    console.log("hi");
   };
+
+  logHi = (e)=>{
+    console.log('hi')
+  }
 
   render() {
     return (
@@ -178,6 +177,8 @@ class App extends React.Component {
           addToCart={this.addToCart}
           deleteItem={this.deleteItem}
           handleInput={this.handleInput}
+          newProductTitle={this.state.newProductTitle}
+          newProductDesc={this.state.newProductDesc}
           addProduct={this.addProduct}
           state={this.state}
           description="Add Shelby"

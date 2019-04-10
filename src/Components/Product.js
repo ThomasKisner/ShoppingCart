@@ -1,22 +1,22 @@
 import React from "react";
 
 //Product returns product information
-const Product = props => (
+const Product = ({ img, productTitle, product, price, star }) => (
   <div className="ui link cards">
     <div className="card">
       <div className="image">
-        <img src={props.img} alt="randomProductImage" />
+        <img src={img} alt="randomProductImage" />
       </div>
       <div className="content">
-        <div className="header">{props.productTitle}</div>
+        <div className="header">{productTitle}</div>
         <div className="meta" />
-        <div className="description">{props.product}</div>
+        <div className="description">{product}</div>
       </div>
       <div className="extra content">
-        <span className="right floated">${props.price}</span>
+        <span className="right floated">${price}</span>
         <span>
           <i className="star outline icon" />
-          {props.star}/5.00
+          {star}/5.00
         </span>
       </div>
     </div>
