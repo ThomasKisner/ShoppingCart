@@ -71,7 +71,7 @@ class App extends React.Component {
       this.state.newProductTitle === ""
     ) {
       Alert.error(
-        `<h2>New product name, description, and price are required</h2>`,
+        `<h2>New vehicle name, description, and price are required</h2>`,
         {
           timeout: 3000,
           position: "bottom",
@@ -120,7 +120,7 @@ class App extends React.Component {
         },()=>console.log(this.state));
 
       } else {
-        Alert.error(`<h2>that vehicle has already been added</h2>`, {
+        Alert.error(`<h2>Vehicle is already in inventory</h2>`, {
           timeout: 3000,
           position: "bottom",
           offset: 100
