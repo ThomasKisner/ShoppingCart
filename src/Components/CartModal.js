@@ -16,7 +16,7 @@ const CartModal = ({ addToCart, name, text, cart, removeCartItem }) => (
     }
     centered={false}
     closeIcon
-  >
+  > 
     <Modal.Header>Shopping Cart</Modal.Header>
     <Modal.Description>
       <InCart cart={cart} removeCartItem={removeCartItem} />

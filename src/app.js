@@ -56,7 +56,7 @@ class App extends React.Component {
   };
 
   handleInput = ({ target: { name, value } }) => {
-    this.setState({ [name]: value }, () => console.log(this.state));
+    this.setState({ [name]: value }, () => console.log(name, value));
   };
 
   //adds commas to price string
@@ -71,9 +71,9 @@ class App extends React.Component {
       this.state.newProductTitle === ""
     ) {
       Alert.error(
-        `New product name, description, and price are required</h1>`,
+        `<h2>New product name, description, and price are required</h2>`,
         {
-          timeout: 2000,
+          timeout: 3000,
           position: "bottom",
           offset: 100
         }
@@ -84,9 +84,12 @@ class App extends React.Component {
         !this.state.products.find(
           product =>
             product.productTitle.toLowerCase() ===
-            this.state.newProductDesc.toLowerCase()
+            this.state.newProductTitle.toLowerCase(), console.log(this.product)
         )
       ) {
+        for(let i = 0;i<this.state.products.length; i++){
+          console.log(this.state.products[i].productTitle, this.state.newProductTitle)
+        }
         //making sure price number has 2 decimal places and commas where appropriate
         let number = parseInt(this.state.newProductPrice).toFixed(2);
         number = this.numberWithCommas(number);
@@ -114,10 +117,11 @@ class App extends React.Component {
           newProductDesc: "",
           newProductPrice: "",
           newProductURL: ""
-        });
+        },()=>console.log(this.state));
+
       } else {
-        Alert.error(`That vehicle has already been added</h1>`, {
-          timeout: 2000,
+        Alert.error(`<h2>that vehicle has already been added</h2>`, {
+          timeout: 3000,
           position: "bottom",
           offset: 100
         });
@@ -156,8 +160,8 @@ class App extends React.Component {
     }
   };
 
-  removeCartItem = (e) => {
-    console.log('trying to remove cart item')
+  removeCartItem = e => {
+    console.log("trying to remove cart item");
     //using the product attribute to grab the whole project object and assigning it to a variable
     const cartArray = this.state.cart.filter(
       product => product.productTitle !== e.target.getAttribute("name")
@@ -165,9 +169,9 @@ class App extends React.Component {
     this.setState({ cart: cartArray }, () => console.log(this.state));
   };
 
-  logHi = (e)=>{
-    console.log('hi')
-  }
+  logHi = e => {
+    console.log("hi");
+  };
 
   render() {
     return (
@@ -177,13 +181,15 @@ class App extends React.Component {
           addToCart={this.addToCart}
           deleteItem={this.deleteItem}
           handleInput={this.handleInput}
-          newProductTitle={this.state.newProductTitle}
-          newProductDesc={this.state.newProductDesc}
           addProduct={this.addProduct}
           state={this.state}
           description="Add Shelby"
           cart={this.state.cart}
           removeCartItem={this.removeCartItem}
+          newProductTitle={this.state.newProductTitle}
+          newProductDesc={this.state.newProductDesc}
+          newProductPrice={this.state.newProductPrice}
+          newProductURL={this.state.newProductURL}
         />
 
         <CartModalFloating
