@@ -1,8 +1,7 @@
 import React from "react";
 
 //Component creates form users can add a product with
-const AddProduct = (props) => {
-  return (
+const AddProduct = (props) => (
     <div className="ui form" id="form">
       <h2>Add Shelby</h2>
       <div className="fields">
@@ -51,6 +50,6 @@ const AddProduct = (props) => {
       </div>
     </div>
   );
-};
+
 
 export default AddProduct;
