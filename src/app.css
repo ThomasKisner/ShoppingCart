@@ -76,7 +76,7 @@
   text-emphasis: 400;
   background-color: darkgray !important;
   color: white !important;
-  z-index: 9999
+  z-index: 999
 }
 
 .ui.button.ui.basic.grey.button.modalFloating:active {
@@ -86,7 +86,7 @@
   text-emphasis: 400;
   background-color: gray !important;
   color: white !important;
-  z-index: 9999
+  z-index: 999
 }
 
 .productsContainer{
